@@ -13,19 +13,15 @@ export function useFaucetJettonContract() {
   const faucetJettonContract = useAsyncInitialize(async () => {
     if (!client || !wallet) return;
     const contract = new FaucetJetton(
-      Address.parse("EQB8StgTQXidy32a8xfu7j4HMoWYV0b0cFM8nXsP2cza_b7Y") // replace with your address from tutorial 2 step 8
+      Address.parse("EQDyNhhx8N1Uy_jF4b1cT_CUFLsHKP6IwP6CwpsqBSM1tfn_") // replace with your address from tutorial 2 step 8
     );
     return client.open(contract) as OpenedContract<FaucetJetton>;
   }, [client, wallet]);
 
   const jwContract = useAsyncInitialize(async () => {
     if (!faucetJettonContract || !client) return;
-    const jettonWalletAddress = await faucetJettonContract!.getWalletAddress(
-      Address.parse(wallet!)
-    );
-    return client!.open(
-      new FaucetJettonWallet(Address.parse(jettonWalletAddress))
-    ) as OpenedContract<FaucetJettonWallet>;
+    const jettonWalletAddress = await faucetJettonContract!.getWalletAddress(Address.parse(wallet!));
+    return client!.open(new FaucetJettonWallet(Address.parse(jettonWalletAddress))) as OpenedContract<FaucetJettonWallet>;
   }, [faucetJettonContract, client]);
 
   const { data, isFetching } = useQuery(
