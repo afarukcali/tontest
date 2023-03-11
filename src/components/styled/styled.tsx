@@ -21,11 +21,18 @@ export const FlexBoxCol = styled.div`
   display: flex;
   flex-direction: column;
   gap: 10px;
+  align-items: center;
+`;
+
+export const FlexBoxColCenter = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
 `;
 
 export const Button = styled.button`
-  background-color: ${(props) =>
-    props.disabled ? "#6e6e6e" : "var(--tg-theme-button-color)"};
+  background-color: ${(props) => (props.disabled ? "#6e6e6e" : "var(--tg-theme-button-color)")};
   border: 0;
   border-radius: 8px;
   padding: 10px 20px;

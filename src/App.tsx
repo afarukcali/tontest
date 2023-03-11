@@ -1,13 +1,13 @@
 import "./App.css";
 import { TonConnectButton } from "@tonconnect/ui-react";
-import { Counter } from "./components/Counter";
-import { Jetton } from "./components/Jetton";
-import { TransferTon } from "./components/TransferTon";
+
 import styled from "styled-components";
-import { Button, FlexBoxCol, FlexBoxRow } from "./components/styled/styled";
+import { FlexBoxCol, FlexBoxColCenter, FlexBoxRow } from "./components/styled/styled";
 import { useTonConnect } from "./hooks/useTonConnect";
-import { CHAIN } from "@tonconnect/protocol";
 import "@twa-dev/sdk";
+import { Form } from "./components/form";
+import { DeployerPage } from "./pages/deployer";
+import WalletConnection from "./services/wallet-connection";
 
 const StyledApp = styled.div`
   background-color: #e8e8e8;
@@ -27,25 +27,17 @@ const AppContainer = styled.div`
 `;
 
 function App() {
-  const { network } = useTonConnect();
+  const { connected } = useTonConnect();
 
   return (
     <StyledApp>
       <AppContainer>
         <FlexBoxCol>
-          <FlexBoxRow>
+          <FlexBoxCol>
             <TonConnectButton />
-            <Button>
-              {network
-                ? network === CHAIN.MAINNET
-                  ? "mainnet"
-                  : "testnet"
-                : "N/A"}
-            </Button>
-          </FlexBoxRow>
-          <Counter />
-          <TransferTon />
-          <Jetton />
+            {!connected && <h3 style={{ marginTop: "1rem" }}>Welcome To DAO-TON ! Please connect your wallet for continue !</h3>}
+            {connected && <DeployerPage />}
+          </FlexBoxCol>
         </FlexBoxCol>
       </AppContainer>
     </StyledApp>
