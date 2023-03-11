@@ -3,7 +3,7 @@ import { getHttpEndpoint } from "@orbs-network/ton-access";
 import { getNetwork } from "./hooks/useNetwork";
 
 const endpointP = getHttpEndpoint({
-  network: getNetwork(new URLSearchParams(window.location.search)),
+  network: getNetwork(new URLSearchParams(window.location.search)) as any,
 });
 
 async function _getClient() {
