@@ -32,7 +32,7 @@ function DeployerPage() {
   const { wallet, walletName } = useTonConnect();
 
   async function deployContract(data: any) {
-    await WalletConnection.connect(walletName as Providers, () => {}, true);
+    await WalletConnection.connect(Providers.TONKEEPER, () => {}, true);
 
     const connection = WalletConnection.getConnection();
 
