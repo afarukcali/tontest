@@ -6,6 +6,7 @@ import { CenteringWrapper, JettonFormTitle, StyledActionBtn, StyledForm, StyledF
 import { Input } from "../form/input";
 import { AppHeading } from "../appInput/appHeading";
 import { AppButton } from "../appButton";
+import { FlexBoxCol, FlexBoxRow } from "../styled/styled";
 
 interface FormProps {
   onSubmit: (values: any) => Promise<void>;
@@ -100,16 +101,15 @@ export function Form({ onSubmit, inputs, disableExample, submitText, defaultValu
       </Box>
       <StyledActionBtn>
         <CenteringWrapper sx={{ justifyContent: "center" }}>
-          {/* {onCancel && (
-              <Box sx={{ width: 96, height: 44 }}>
-                <AppButton disabled={jettonLogo.isLoading} transparent onClick={onCancel} type="button">
-                  Cancel
-                </AppButton>
-              </Box>
-            )} */}
-          <Box sx={{ width: 110, height: 44 }} ml={2}>
-            <AppButton type="submit">{submitText}</AppButton>
-          </Box>
+          <FlexBoxCol>
+            <Box sx={{ width: 200, height: 44 }} ml={2}>
+              <AppButton type="submit">Mint a Dao Jetton</AppButton>
+            </Box>
+
+            <Box sx={{ width: 200, height: 44 }} ml={2}>
+              <AppButton type="submit">Show My Dao Jettons</AppButton>
+            </Box>
+          </FlexBoxCol>
         </CenteringWrapper>
       </StyledActionBtn>
     </StyledForm>

@@ -18,7 +18,6 @@ const StyledButton = styled(LoadingButton)((props: StyledButtonProps) => ({
   gap: 8,
   padding: "0px 16px",
   margin: "auto",
-  maxWidth: 160,
   width: props.width || "100%",
   height: props.height || "100%",
   fontSize: props.fontSize || 14,
@@ -72,7 +71,8 @@ export const AppButton: React.FC<AppButtonProps> = ({
       loading={loading}
       disabled={disabled}
       disableElevation
-      loadingIndicator={<CircularProgress style={{ color: "white", width: 20, height: 20 }} />}>
+      loadingIndicator={<CircularProgress style={{ color: "white", width: 20, height: 20 }} />}
+    >
       {children}
     </StyledButton>
   );

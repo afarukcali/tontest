@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Address } from "ton";
-import { Box, Fade, Link, Typography } from "@mui/material";
+import { Box, Fade, Button, Link, Typography } from "@mui/material";
 
 import { Link as ReactRouterLink } from "react-router-dom";
 import { FormWrapper, ScreenHeading, StyledDescription, StyledTxLoaderContent, SubHeadingWrapper } from "./styles";

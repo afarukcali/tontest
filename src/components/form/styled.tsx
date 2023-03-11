@@ -95,7 +95,7 @@ const StyledActionBtn = styled(Box)({
   marginRight: "auto",
   width: "100%",
   "& .base-button": {
-    maxWidth: 150,
+    maxWidth: 400,
     width: "100%",
   },
 });
