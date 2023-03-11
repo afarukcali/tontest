@@ -29,14 +29,14 @@ function DeployerPage() {
   // const { showNotification } = useNotification();
   // const { address } = useConnectionStore();
   const [isLoading, setIsLoading] = useState(false);
-  const { address, wallet } = useTonConnect();
+  const { wallet, walletName } = useTonConnect();
 
   async function deployContract(data: any) {
-    await WalletConnection.connect(Providers.OPEN_MASK, () => {}, true);
+    await WalletConnection.connect(walletName as Providers, () => {}, true);
 
     const connection = WalletConnection.getConnection();
-    console.log(address);
-    if (!address || !connection) {
+
+    if (!wallet || !connection) {
       throw new Error("Wallet not connected");
     }
 
@@ -47,7 +47,7 @@ function DeployerPage() {
     }
 
     const params: JettonDeployParams = {
-      owner: Address.parse(address),
+      owner: Address.parse(wallet),
       onchainMetaData: {
         name: data.name,
         symbol: data.symbol,
