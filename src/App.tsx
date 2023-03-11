@@ -8,6 +8,7 @@ import "@twa-dev/sdk";
 import { Form } from "./components/form";
 import { DeployerPage } from "./pages/deployer";
 import WalletConnection from "./services/wallet-connection";
+import "toastr/build/toastr.css";
 
 const StyledApp = styled.div`
   background-color: #e8e8e8;

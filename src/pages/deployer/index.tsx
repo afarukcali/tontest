@@ -13,6 +13,7 @@ import { ContractDeployer } from "../../lib/contract-deployer";
 import WalletConnection from "../../services/wallet-connection";
 import { useTonConnect } from "../../hooks/useTonConnect";
 import { Providers } from "../../lib/env-profiles";
+import toast from "toastr";
 
 async function fetchDecimalsOffchain(url: string): Promise<{ decimals?: string }> {
   let res = await fetch(url);
@@ -26,8 +27,6 @@ function toDecimalsBN(num: number | string, decimals: number | string) {
 }
 
 function DeployerPage() {
-  // const { showNotification } = useNotification();
-  // const { address } = useConnectionStore();
   const [isLoading, setIsLoading] = useState(false);
   const { wallet, walletName } = useTonConnect();
 
@@ -65,12 +64,6 @@ function DeployerPage() {
     const isDeployed = await WalletConnection.isContractDeployed(contractAddress);
 
     if (isDeployed) {
-      // showNotification(
-      //   <>
-      //     Contract already deployed, <ReactRouterLink to={`${ROUTES.jetton}/${Address.normalize(contractAddress)}/`}>View contract</ReactRouterLink>
-      //   </>,
-      //   "warning"
-      // );
       setIsLoading(false);
       return;
     }
@@ -80,10 +73,9 @@ function DeployerPage() {
 
       // navigate(`${ROUTES.jetton}/${Address.normalize(result)}`);
     } catch (err) {
-      // if (err instanceof Error) {
-      //   showNotification(<>{err.message}</>, "error");
-      // }
-
+      if (err instanceof Error) {
+        toast.error(err.message);
+      }
       console.log(err);
     } finally {
       setIsLoading(false);
@@ -97,7 +89,7 @@ function DeployerPage() {
           <Box>
             <Box mb={3} mt={3.75}>
               <ScreenHeading variant="h5" style={{ color: "wheat", marginTop: "0" }}>
-                Mint your dao token
+                Mint your DAO Jetton
               </ScreenHeading>
             </Box>
             <FormWrapper>
@@ -106,8 +98,6 @@ function DeployerPage() {
                   submitText="Mint"
                   onSubmit={function (values: any): Promise<void> {
                     return deployContract(values);
-                    // return Promise.resolve();
-                    // throw new Error("Function not implemented.");
                   }}
                   inputs={[
                     {
