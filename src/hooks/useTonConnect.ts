@@ -7,7 +7,7 @@ export function useTonConnect(): {
   connected: boolean;
   wallet: string | null;
   network: CHAIN | null;
-  address: string;
+  walletName: string;
 } {
   const [tonConnectUI] = useTonConnectUI();
   const wallet = useTonWallet();
@@ -30,6 +30,6 @@ export function useTonConnect(): {
     connected: !!wallet?.account.address,
     wallet: wallet?.account.address ?? null,
     network: wallet?.account.chain ?? null,
-    address: wallet?.account.address ?? "",
+    walletName: wallet?.name ?? "",
   };
 }
