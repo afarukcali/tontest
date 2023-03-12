@@ -1,6 +1,7 @@
 import BN from "bn.js";
 import { Address, Cell, contractAddress, StateInit } from "ton";
 import { TonConnection } from "@ton-defi.org/ton-connection";
+import { Sender } from "ton-core";
 
 interface ContractDeployDetails {
   deployer: Address;
@@ -20,18 +21,15 @@ export class ContractDeployer {
     });
   }
 
-  async deployContract(
-    params: ContractDeployDetails,
-    tonConnection: TonConnection,
-  ): Promise<Address> {
+  async deployContract(params: ContractDeployDetails, tonConnection: Sender): Promise<Address> {
     const _contractAddress = this.addressForContract(params);
 
     if (!params.dryRun) {
-      await tonConnection.requestTransaction({
-        to: _contractAddress,
-        value: params.value,
-        stateInit: new StateInit({ data: params.data, code: params.code }),
-        message: params.message,
+      await tonConnection.send({
+        to: _contractAddress as any,
+        value: BigInt(params.value.toNumber()),
+        init: { data: params.data as any, code: params.code as any },
+        // message: params.message,
       });
     }
 

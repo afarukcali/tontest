@@ -9,6 +9,7 @@ import { buildJettonOnchainMetadata, burn, mintBody, transfer, updateMetadataBod
 import { readJettonMetadata, changeAdminBody, JettonMetaDataKeys } from "./jetton-minter";
 import { getClient } from "./get-ton-client";
 import { cellToAddress, makeGetCall } from "./make-get-call";
+import { Sender } from "ton-core";
 
 export const JETTON_DEPLOY_GAS = toNano(0.25);
 
@@ -38,7 +39,7 @@ export interface JettonDeployParams {
 }
 
 class JettonDeployController {
-  async createJetton(params: JettonDeployParams, tonConnection: TonConnection): Promise<Address> {
+  async createJetton(params: JettonDeployParams, tonConnection: Sender): Promise<Address> {
     const contractDeployer = new ContractDeployer();
     const tc = await getClient();
 

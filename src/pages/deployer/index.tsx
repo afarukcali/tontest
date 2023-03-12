@@ -28,14 +28,10 @@ function toDecimalsBN(num: number | string, decimals: number | string) {
 
 function DeployerPage() {
   const [isLoading, setIsLoading] = useState(false);
-  const { wallet, walletName } = useTonConnect();
+  const { wallet, sender } = useTonConnect();
 
   async function deployContract(data: any) {
-    await WalletConnection.connect(Providers.TONKEEPER, () => {}, true);
-
-    const connection = WalletConnection.getConnection();
-
-    if (!wallet || !connection) {
+    if (!wallet) {
       throw new Error("Wallet not connected");
     }
 
@@ -69,7 +65,7 @@ function DeployerPage() {
     }
 
     try {
-      const result = await jettonDeployController.createJetton(params, connection);
+      const result = await jettonDeployController.createJetton(params, sender);
 
       // navigate(`${ROUTES.jetton}/${Address.normalize(result)}`);
     } catch (err) {
